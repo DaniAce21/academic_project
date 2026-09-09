@@ -1,0 +1,84 @@
+{
+    "teachers": [
+        {
+            "id": 1,
+            "first_name": "Carlos",
+            "last_name": "Pérez"
+        },
+        {
+            "id": 2,
+            "first_name": "María",
+            "last_name": "González"
+        },
+        {
+            "id": 3,
+            "first_name": "Pedro",
+            "last_name": "Ramírez"
+        }
+    ],
+    "courses": [
+        {
+            "id": 1,
+            "name": "Programación",
+            "teacher_id": 1
+        },
+        {
+            "id": 2,
+            "name": "Bases de Datos",
+            "teacher_id": 2
+        },
+        {
+            "id": 3,
+            "name": "Desarrollo Backend",
+            "teacher_id": 3
+        }
+    ],
+    "students": [
+        {
+            "id": 1,
+            "first_name": "Daniel",
+            "last_name": "Aceitón"
+        },
+        {
+            "id": 2,
+            "first_name": "Camila",
+            "last_name": "Muñoz"
+        },
+        {
+            "id": 3,
+            "first_name": "Felipe",
+            "last_name": "Soto"
+        },
+        {
+            "id": 4,
+            "first_name": "Valentina",
+            "last_name": "Rojas"
+        }
+    ],
+    "student_courses": [
+        {
+            "student_id": 1,
+            "course_id": 1
+        },
+        {
+            "student_id": 1,
+            "course_id": 3
+        },
+        {
+            "student_id": 2,
+            "course_id": 1
+        },
+        {
+            "student_id": 2,
+            "course_id": 2
+        },
+        {
+            "student_id": 3,
+            "course_id": 2
+        },
+        {
+            "student_id": 4,
+            "course_id": 3
+        }
+    ]
+}

@@ -1,0 +1,62 @@
+PROMPTS UTILIZADOS EN EL DESARROLLO DEL PROYECTO
+Sistema de Gestión Académica - Django & DRF
+
+1. CONFIGURACIÓN INICIAL DEL PROYECTO
+
+Prompt:
+"Necesito desarrollar una evaluación práctica de Desarrollo Backend utilizando Django y Django REST Framework. El proyecto debe llamarse academic_project y la aplicación academic. Necesito hacerlo desde cero y paso a paso, explicando cada parte para poder defender el proyecto posteriormente."
+
+2. CREACIÓN DE LOS MODELOS
+
+Prompt:
+"Crear los modelos Django para un Sistema de Gestión Académica con las entidades Teacher, Course, Student y StudentCourse. Teacher debe tener id, first_name y last_name. Course debe tener id, name y teacher_id. Student debe tener id, first_name y last_name. StudentCourse debe relacionar estudiantes y cursos."
+
+3. SERIALIZADORES
+
+Prompt:
+"Crear los serializers utilizando Django REST Framework para Teacher, Course y Student. Necesito que el código esté comentado y explicado para poder comprenderlo."
+
+4. API REST
+
+Prompt:
+"Crear endpoints GET utilizando Django REST Framework para obtener docentes, cursos y estudiantes en formato JSON. Los endpoints deben ser /api/teachers/, /api/courses/ y /api/students/."
+
+5. VISTAS HTML
+
+Prompt:
+"Crear las vistas HTML para courses.html y students.html utilizando templates de Django. La interfaz debe utilizar Bootstrap mediante CDN."
+
+6. CONSUMO ASÍNCRONO DE LA API
+
+Prompt:
+"Crear JavaScript separado del HTML utilizando fetch() para consumir de forma asíncrona /api/courses/ y /api/students/ y mostrar los resultados dinámicamente en tablas."
+
+7. PLANTILLA BASE
+
+Prompt:
+"Crear un base.html para el Sistema de Gestión Académica utilizando Bootstrap, con una barra de navegación para acceder a Cursos y Estudiantes. Mantener CSS separado del HTML."
+
+8. ESTILOS
+
+Prompt:
+"Crear una hoja styles.css separada del HTML para mejorar la presentación de las páginas del Sistema de Gestión Académica."
+
+9. CARGA DE DATOS
+
+Prompt:
+"Crear un archivo JSON con datos de ejemplo para docentes, cursos, estudiantes y las relaciones entre estudiantes y cursos, y crear un comando de Django para cargar esos datos en la base de datos."
+
+10. DEPURACIÓN
+
+Prompt:
+"Estoy obteniendo un error de Django relacionado con una tabla que no existe en la base de datos. Ayúdame a revisar las migraciones y solucionar el problema paso a paso."
+
+11. ARCHIVOS ESTÁTICOS
+
+Prompt:
+"Los archivos CSS y JavaScript están devolviendo error 404 en Django. Ayúdame a revisar la estructura de carpetas static y corregir la ubicación de los archivos."
+
+12. REVISIÓN DEL PROYECTO
+
+Prompt:
+"Revisar el proyecto de acuerdo con los requisitos de la evaluación y comprobar que se hayan implementado los modelos, serializers, endpoints REST, templates, fetch asíncrono, Bootstrap y archivos estáticos necesarios."

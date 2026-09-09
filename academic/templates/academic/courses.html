@@ -1,0 +1,81 @@
+{% extends "academic/base.html" %}
+
+{% load static %}
+
+{% block title %}
+Cursos | Gestión Académica
+{% endblock %}
+
+
+{% block content %}
+
+<!-- ======================================================
+     ENCABEZADO DE LA PÁGINA
+     ====================================================== -->
+
+<div class="page-header mb-4">
+
+    <h1 class="display-6 fw-bold">
+        Cursos
+    </h1>
+
+    <p class="text-muted">
+        Listado de asignaturas y profesores asignados.
+    </p>
+
+</div>
+
+
+<!-- ======================================================
+     TABLA DE CURSOS
+     ====================================================== -->
+
+<div class="card shadow-sm">
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Asignatura</th>
+                        <th>Profesor</th>
+                    </tr>
+
+                </thead>
+
+                <!--
+                    JavaScript insertará aquí los cursos
+                    obtenidos desde la API REST.
+                -->
+                <tbody id="courses-table-body">
+
+                    <tr>
+                        <td colspan="3" class="text-center">
+                            Cargando cursos...
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<!-- JavaScript específico de la página de cursos -->
+<script src="{% static 'academic/js/courses.js' %}"></script>
+
+{% endblock %}
