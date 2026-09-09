@@ -202,3 +202,80 @@ Bootstrap, el JavaScript separado consumiendo la API con fetch(), y
 señaló como pendiente completar este mismo archivo (prompts.txt) con
 las respuestas de la IA además de los prompts, para cumplir
 íntegramente el criterio 8 de la pauta.
+
+======================================================================
+13. CRUD DE PROFESORES EN LA INTERFAZ WEB
+======================================================================
+
+Prompt:
+"Necesito completar la plantilla teachers.html de mi evaluación de
+Django y Django REST Framework. Ya tengo el modelo Teacher, el
+TeacherSerializer y un ModelViewSet con las rutas /api/teachers/.
+Quiero que teachers.html muestre los profesores mediante fetch()
+asíncrono y que además tenga un CRUD visual: formulario para crear,
+botones para editar y eliminar, utilizando POST, PUT y DELETE contra
+la API REST. Mantén Bootstrap y JavaScript separado del HTML. El
+código debe ser sencillo, comentado y apropiado para una evaluación
+de Desarrollo Backend."
+
+Respuesta:
+La IA propuso completar teachers.html con un formulario de creación y
+edición, una tabla dinámica y botones de Editar y Eliminar. El archivo
+teachers.js consume /api/teachers/ mediante fetch() y utiliza GET para
+listar, POST para crear, PUT para actualizar y DELETE para eliminar.
+También se agregó un enlace "Profesores" al menú de navegación.
+
+
+
+PROMPT 4 – IMPLEMENTACIÓN DE CRUD VISUAL
+
+Prompt utilizado:
+
+"En mi proyecto Django de gestión académica tengo tres vistas HTML: Profesores, Estudiantes y Cursos. Ya tengo los modelos, serializers y ViewSets de Django REST Framework funcionando. Necesito implementar un CRUD visual completo en las tres vistas utilizando JavaScript y fetch(), de manera que el usuario pueda listar, crear, editar y eliminar registros desde las páginas HTML sin utilizar formularios tradicionales de Django.
+
+Para Profesores necesito:
+
+Mostrar el listado de profesores mediante GET.
+Crear profesores mediante POST.
+Editar profesores mediante PUT.
+Eliminar profesores mediante DELETE.
+Utilizar un formulario con nombre y apellido.
+Agregar botones de Editar y Eliminar.
+
+Para Estudiantes necesito:
+
+Mostrar el listado de estudiantes mediante GET.
+Crear estudiantes mediante POST.
+Editar estudiantes mediante PUT.
+Eliminar estudiantes mediante DELETE.
+Utilizar un formulario con nombre y apellido.
+Agregar botones de Editar y Eliminar.
+
+Para Cursos necesito:
+
+Mostrar el listado de cursos mediante GET.
+Crear cursos mediante POST.
+Editar cursos mediante PUT.
+Eliminar cursos mediante DELETE.
+Utilizar un formulario para ingresar el nombre del curso.
+Permitir seleccionar el profesor asignado mediante un select.
+Mostrar el profesor asignado en la tabla.
+Agregar botones de Editar y Eliminar.
+
+Mantener Bootstrap para el diseño y realizar todas las operaciones mediante fetch() contra los endpoints de Django REST Framework."
+
+Respuesta/implementación generada:
+
+Se implementó un CRUD visual completo para las tres entidades principales del proyecto: Profesores, Estudiantes y Cursos.
+
+La implementación utiliza JavaScript con fetch() para comunicarse de forma asíncrona con los endpoints de Django REST Framework.
+
+Para Profesores se implementaron las operaciones GET, POST, PUT y DELETE, permitiendo listar, crear, editar y eliminar profesores desde la interfaz.
+
+Para Estudiantes se implementaron las operaciones GET, POST, PUT y DELETE, permitiendo administrar los estudiantes directamente desde la interfaz HTML.
+
+Para Cursos se implementaron las operaciones GET, POST, PUT y DELETE, incluyendo la selección del profesor asociado mediante un campo select.
+
+También se agregaron botones de edición y eliminación, formularios para crear y modificar registros, confirmaciones antes de eliminar y actualización dinámica de las tablas después de cada operación.
+
+La interfaz mantiene Bootstrap y el consumo asíncrono de la API mediante JavaScript y fetch().

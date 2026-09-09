@@ -1,81 +1,56 @@
 {% extends "academic/base.html" %}
-
 {% load static %}
 
-{% block title %}
-Cursos | Gestión Académica
-{% endblock %}
-
+{% block title %}Cursos | Gestión Académica{% endblock %}
 
 {% block content %}
-
-<!-- ======================================================
-     ENCABEZADO DE LA PÁGINA
-     ====================================================== -->
-
 <div class="page-header mb-4">
-
-    <h1 class="display-6 fw-bold">
-        Cursos
-    </h1>
-
-    <p class="text-muted">
-        Listado de asignaturas y profesores asignados.
-    </p>
-
+    <h1 class="display-6 fw-bold">Cursos</h1>
+    <p class="text-muted">Gestión de asignaturas y profesores asignados.</p>
 </div>
 
-
-<!-- ======================================================
-     TABLA DE CURSOS
-     ====================================================== -->
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <h5 class="card-title" id="course-form-title">Agregar curso</h5>
+        <form id="course-form">
+            <input type="hidden" id="course-id">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="course-name" class="form-label">Asignatura</label>
+                    <input type="text" class="form-control" id="course-name" maxlength="150" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="course-teacher" class="form-label">Profesor</label>
+                    <select class="form-select" id="course-teacher" required>
+                        <option value="">Selecciona un profesor</option>
+                    </select>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100" id="course-save-button">Guardar</button>
+                </div>
+            </div>
+            <button type="button" class="btn btn-secondary mt-3 d-none" id="course-cancel-button">Cancelar edición</button>
+        </form>
+        <div id="course-message" class="mt-3"></div>
+    </div>
+</div>
 
 <div class="card shadow-sm">
-
     <div class="card-body">
-
         <div class="table-responsive">
-
             <table class="table table-hover align-middle">
-
                 <thead class="table-dark">
-
-                    <tr>
-                        <th>ID</th>
-                        <th>Asignatura</th>
-                        <th>Profesor</th>
-                    </tr>
-
+                    <tr><th>ID</th><th>Asignatura</th><th>Profesor</th><th>Acciones</th></tr>
                 </thead>
-
-                <!--
-                    JavaScript insertará aquí los cursos
-                    obtenidos desde la API REST.
-                -->
                 <tbody id="courses-table-body">
-
-                    <tr>
-                        <td colspan="3" class="text-center">
-                            Cargando cursos...
-                        </td>
-                    </tr>
-
+                    <tr><td colspan="4" class="text-center">Cargando cursos...</td></tr>
                 </tbody>
-
             </table>
-
         </div>
-
     </div>
-
 </div>
-
 {% endblock %}
 
-
 {% block extra_js %}
-
-<!-- JavaScript específico de la página de cursos -->
 <script src="{% static 'academic/js/courses.js' %}"></script>
-
 {% endblock %}
