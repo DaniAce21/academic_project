@@ -1,62 +1,204 @@
 PROMPTS UTILIZADOS EN EL DESARROLLO DEL PROYECTO
 Sistema de Gestión Académica - Django & DRF
+Herramienta de IA utilizada: Claude (Anthropic)
 
+======================================================================
 1. CONFIGURACIÓN INICIAL DEL PROYECTO
+======================================================================
 
 Prompt:
-"Necesito desarrollar una evaluación práctica de Desarrollo Backend utilizando Django y Django REST Framework. El proyecto debe llamarse academic_project y la aplicación academic. Necesito hacerlo desde cero y paso a paso, explicando cada parte para poder defender el proyecto posteriormente."
+"Necesito desarrollar una evaluación práctica de Desarrollo Backend
+utilizando Django y Django REST Framework. El proyecto debe llamarse
+academic_project y la aplicación academic. Necesito hacerlo desde cero
+y paso a paso, explicando cada parte para poder defender el proyecto
+posteriormente."
 
+Respuesta (resumen):
+La IA propuso la estructura completa de carpetas del proyecto
+(academic_project/, app academic/, carpetas templates/, static/css/,
+static/js/, data/), y entregó la secuencia de comandos para crear el
+entorno virtual, instalar Django y DRF, crear el proyecto con
+django-admin startproject y la app con startapp, dejando manage.py en
+la raíz del repositorio.
+
+======================================================================
 2. CREACIÓN DE LOS MODELOS
+======================================================================
 
 Prompt:
-"Crear los modelos Django para un Sistema de Gestión Académica con las entidades Teacher, Course, Student y StudentCourse. Teacher debe tener id, first_name y last_name. Course debe tener id, name y teacher_id. Student debe tener id, first_name y last_name. StudentCourse debe relacionar estudiantes y cursos."
+"Crear los modelos Django para un Sistema de Gestión Académica con las
+entidades Teacher, Course, Student y StudentCourse. Teacher debe tener
+id, first_name y last_name. Course debe tener id, name y teacher_id.
+Student debe tener id, first_name y last_name. StudentCourse debe
+relacionar estudiantes y cursos."
 
+Respuesta (resumen):
+La IA generó el código de models.py con las cuatro clases solicitadas,
+usando ForeignKey (Teacher → Course, y Student/Course → StudentCourse
+para representar la relación muchos a muchos), Meta.ordering para
+ordenar los registros, __str__ para representación legible, y agregó
+un UniqueConstraint en StudentCourse para evitar que un mismo
+estudiante quede inscrito dos veces en la misma asignatura, explicando
+que esto es una buena práctica adicional que no altera el esquema
+pedido por el profesor.
+
+======================================================================
 3. SERIALIZADORES
+======================================================================
 
 Prompt:
-"Crear los serializers utilizando Django REST Framework para Teacher, Course y Student. Necesito que el código esté comentado y explicado para poder comprenderlo."
+"Crear los serializers utilizando Django REST Framework para Teacher,
+Course y Student. Necesito que el código esté comentado y explicado
+para poder comprenderlo."
 
+Respuesta (resumen):
+Se entregó serializers.py con TeacherSerializer, CourseSerializer y
+StudentSerializer basados en ModelSerializer. Se explicó que anidar
+TeacherSerializer(read_only=True) dentro de CourseSerializer permite
+que la API devuelva el profesor completo (no solo su id) dentro de
+cada curso, lo que simplifica el consumo desde el frontend.
+
+======================================================================
 4. API REST
+======================================================================
 
 Prompt:
-"Crear endpoints GET utilizando Django REST Framework para obtener docentes, cursos y estudiantes en formato JSON. Los endpoints deben ser /api/teachers/, /api/courses/ y /api/students/."
+"Crear endpoints GET utilizando Django REST Framework para obtener
+docentes, cursos y estudiantes en formato JSON. Los endpoints deben
+ser /api/teachers/, /api/courses/ y /api/students/."
 
+Respuesta (resumen):
+La IA agregó a views.py las funciones teacher_list, course_list y
+student_list decoradas con @api_view(["GET"]), que consultan los
+modelos, los pasan por su serializer respectivo (many=True) y
+devuelven un Response con el JSON. Además indicó registrar estas
+rutas en academic/urls.py bajo el prefijo /api/.
+
+======================================================================
 5. VISTAS HTML
+======================================================================
 
 Prompt:
-"Crear las vistas HTML para courses.html y students.html utilizando templates de Django. La interfaz debe utilizar Bootstrap mediante CDN."
+"Crear las vistas HTML para courses.html y students.html utilizando
+templates de Django. La interfaz debe utilizar Bootstrap mediante
+CDN."
 
+Respuesta (resumen):
+Se generaron courses_page y students_page en views.py, que solo
+llaman a render() sin pasar datos de contexto (los datos se cargan
+después vía fetch). Se explicó que esto es el "enmascaramiento": el
+HTML se sirve normal, pero los datos reales vienen de la API en
+segundo plano.
+
+======================================================================
 6. CONSUMO ASÍNCRONO DE LA API
+======================================================================
 
 Prompt:
-"Crear JavaScript separado del HTML utilizando fetch() para consumir de forma asíncrona /api/courses/ y /api/students/ y mostrar los resultados dinámicamente en tablas."
+"Crear JavaScript separado del HTML utilizando fetch() para consumir
+de forma asíncrona /api/courses/ y /api/students/ y mostrar los
+resultados dinámicamente en tablas."
 
+Respuesta (resumen):
+La IA entregó courses.js y students.js con funciones async que hacen
+fetch() a los endpoints, verifican response.ok, parsean el JSON,
+limpian el mensaje "Cargando..." y construyen las filas de la tabla
+dinámicamente con innerHTML, incluyendo manejo de errores con
+try/catch y mensajes tanto para lista vacía como para fallos de red.
+
+======================================================================
 7. PLANTILLA BASE
+======================================================================
 
 Prompt:
-"Crear un base.html para el Sistema de Gestión Académica utilizando Bootstrap, con una barra de navegación para acceder a Cursos y Estudiantes. Mantener CSS separado del HTML."
+"Crear un base.html para el Sistema de Gestión Académica utilizando
+Bootstrap, con una barra de navegación para acceder a Cursos y
+Estudiantes. Mantener CSS separado del HTML."
 
+Respuesta (resumen):
+Se generó base.html con {% load static %}, el CDN de Bootstrap 5, un
+navbar con enlaces a las rutas 'courses' y 'students' usando {% url %},
+un bloque {% block content %} para que cada página hija inserte su
+contenido, y un bloque {% block extra_js %} para que cada plantilla
+cargue su propio archivo JavaScript.
+
+======================================================================
 8. ESTILOS
+======================================================================
 
 Prompt:
-"Crear una hoja styles.css separada del HTML para mejorar la presentación de las páginas del Sistema de Gestión Académica."
+"Crear una hoja styles.css separada del HTML para mejorar la
+presentación de las páginas del Sistema de Gestión Académica."
 
+Respuesta (resumen):
+La IA propuso un styles.css ubicado en static/academic/css/,
+enlazado desde base.html con {% static %}, con ajustes visuales
+menores sobre los componentes de Bootstrap (tarjetas, tablas, navbar)
+para mantener la separación de responsabilidades entre HTML y CSS.
+
+======================================================================
 9. CARGA DE DATOS
+======================================================================
 
 Prompt:
-"Crear un archivo JSON con datos de ejemplo para docentes, cursos, estudiantes y las relaciones entre estudiantes y cursos, y crear un comando de Django para cargar esos datos en la base de datos."
+"Crear un archivo JSON con datos de ejemplo para docentes, cursos,
+estudiantes y las relaciones entre estudiantes y cursos, y crear un
+comando de Django para cargar esos datos en la base de datos."
 
+Respuesta (resumen):
+Se generó data/academic_data.json con las claves teachers, courses,
+students y student_courses, y un management command
+(load_academic_data.py) que lee el archivo y crea los objetos en la
+base de datos usando el ORM, permitiendo precargar datos de prueba sin
+necesidad del panel admin.
+
+======================================================================
 10. DEPURACIÓN
+======================================================================
 
 Prompt:
-"Estoy obteniendo un error de Django relacionado con una tabla que no existe en la base de datos. Ayúdame a revisar las migraciones y solucionar el problema paso a paso."
+"Estoy obteniendo un error de Django relacionado con una tabla que no
+existe en la base de datos. Ayúdame a revisar las migraciones y
+solucionar el problema paso a paso."
 
+Respuesta (resumen):
+La IA guio la verificación del orden correcto de comandos
+(makemigrations antes de migrate), la revisión de que la app
+"academic" estuviera en INSTALLED_APPS, y la confirmación de que el
+archivo de migración 0001_initial.py se había generado y aplicado
+correctamente antes de intentar cargar datos o levantar el servidor.
+
+======================================================================
 11. ARCHIVOS ESTÁTICOS
+======================================================================
 
 Prompt:
-"Los archivos CSS y JavaScript están devolviendo error 404 en Django. Ayúdame a revisar la estructura de carpetas static y corregir la ubicación de los archivos."
+"Los archivos CSS y JavaScript están devolviendo error 404 en Django.
+Ayúdame a revisar la estructura de carpetas static y corregir la
+ubicación de los archivos."
 
+Respuesta (resumen):
+Se identificó que los archivos deben ubicarse en
+academic/static/academic/css/ y academic/static/academic/js/ (con la
+app repetida como subcarpeta, convención de Django para evitar
+colisión de nombres entre apps), y que cada plantilla debe cargarlos
+con {% load static %} y {% static 'academic/css/styles.css' %}.
+
+======================================================================
 12. REVISIÓN DEL PROYECTO
+======================================================================
 
 Prompt:
-"Revisar el proyecto de acuerdo con los requisitos de la evaluación y comprobar que se hayan implementado los modelos, serializers, endpoints REST, templates, fetch asíncrono, Bootstrap y archivos estáticos necesarios."
+"Revisar el proyecto de acuerdo con los requisitos de la evaluación y
+comprobar que se hayan implementado los modelos, serializers,
+endpoints REST, templates, fetch asíncrono, Bootstrap y archivos
+estáticos necesarios."
+
+Respuesta (resumen):
+La IA repasó cada criterio de la pauta de evaluación uno por uno,
+confirmando la presencia de los modelos alineados al ER, los tres
+serializers, los tres endpoints /api/, las plantillas HTML con
+Bootstrap, el JavaScript separado consumiendo la API con fetch(), y
+señaló como pendiente completar este mismo archivo (prompts.txt) con
+las respuestas de la IA además de los prompts, para cumplir
+íntegramente el criterio 8 de la pauta.
