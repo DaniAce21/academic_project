@@ -1,0 +1,81 @@
+{% extends "academic/base.html" %}
+
+{% load static %}
+
+{% block title %}
+Profesores | Gestión Académica
+{% endblock %}
+
+
+{% block content %}
+
+<!-- ======================================================
+     ENCABEZADO DE LA PÁGINA
+     ====================================================== -->
+
+<div class="page-header mb-4">
+
+    <h1 class="display-6 fw-bold">
+        Profesores
+    </h1>
+
+    <p class="text-muted">
+        Listado de docentes registrados en el sistema.
+    </p>
+
+</div>
+
+
+<!-- ======================================================
+     TABLA DE PROFESORES
+     ====================================================== -->
+
+<div class="card shadow-sm">
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                    </tr>
+
+                </thead>
+
+                <!--
+                    JavaScript insertará aquí los profesores
+                    obtenidos desde la API REST.
+                -->
+                <tbody id="teachers-table-body">
+
+                    <tr>
+                        <td colspan="3" class="text-center">
+                            Cargando profesores...
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<!-- JavaScript específico de la página de profesores -->
+<script src="{% static 'academic/js/teachers.js' %}"></script>
+
+{% endblock %}

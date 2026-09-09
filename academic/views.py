@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework import viewsets
 
-from .models import Course, Student, Teacher
+from .models import Course, Student, StudentCourse, Teacher
 from .serializers import (
     CourseSerializer,
+    StudentCourseSerializer,
     StudentSerializer,
     TeacherSerializer
 )
@@ -45,41 +45,52 @@ def students_page(request):
     return render(request, "academic/students.html")
 
 
+def teachers_page(request):
+    """
+    Renderiza la página HTML de profesores.
+
+    Los profesores serán cargados posteriormente mediante
+    una petición asíncrona a la API.
+    """
+    return render(request, "academic/teachers.html")
+
+
 # ============================================================
-# ENDPOINTS REST API
+# ENDPOINTS REST API (CRUD COMPLETO)
+# ============================================================
+#
+# ModelViewSet entrega automáticamente las 5 operaciones REST:
+#   GET    /api/teachers/         -> list
+#   POST   /api/teachers/         -> create
+#   GET    /api/teachers/{id}/    -> retrieve
+#   PUT    /api/teachers/{id}/    -> update
+#   PATCH  /api/teachers/{id}/    -> partial_update
+#   DELETE /api/teachers/{id}/    -> destroy
+#
+# Lo mismo aplica para courses, students y student-courses.
 # ============================================================
 
-@api_view(["GET"])
-def teacher_list(request):
-    """
-    Retorna todos los docentes registrados en formato JSON.
-    """
-
-    teachers = Teacher.objects.all()
-    serializer = TeacherSerializer(teachers, many=True)
-
-    return Response(serializer.data)
+class TeacherViewSet(viewsets.ModelViewSet):
+    """CRUD completo para Teacher."""
+    queryset = Teacher.objects.all()
+    serializer_class = TeacherSerializer
 
 
-@api_view(["GET"])
-def course_list(request):
-    """
-    Retorna todos los cursos registrados en formato JSON.
-    """
-
-    courses = Course.objects.select_related("teacher").all()
-    serializer = CourseSerializer(courses, many=True)
-
-    return Response(serializer.data)
+class CourseViewSet(viewsets.ModelViewSet):
+    """CRUD completo para Course."""
+    queryset = Course.objects.select_related("teacher").all()
+    serializer_class = CourseSerializer
 
 
-@api_view(["GET"])
-def student_list(request):
-    """
-    Retorna todos los estudiantes registrados en formato JSON.
-    """
+class StudentViewSet(viewsets.ModelViewSet):
+    """CRUD completo para Student."""
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
 
-    students = Student.objects.all()
-    serializer = StudentSerializer(students, many=True)
 
-    return Response(serializer.data)
+class StudentCourseViewSet(viewsets.ModelViewSet):
+    """CRUD completo para StudentCourse (inscripciones)."""
+    queryset = StudentCourse.objects.select_related(
+        "student", "course"
+    ).all()
+    serializer_class = StudentCourseSerializer
